@@ -450,7 +450,8 @@ function formatMin(min) {
 function resolveHorario(horarios, aulaCode) {
   let starts = [], ends = [];
   horarios.forEach(h => {
-    const rangeMatch = h.match(/(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/);
+    // Qualquer caractere não-dígito/espaço entre dois horários é tratado como separador
+    const rangeMatch = h.match(/(\d{1,2}:\d{2})\s*[^\d\s:]\s*(\d{1,2}:\d{2})/);
     if (rangeMatch) {
       const s = parseTime(rangeMatch[1]), e = parseTime(rangeMatch[2]);
       if (s !== null) starts.push(s);
